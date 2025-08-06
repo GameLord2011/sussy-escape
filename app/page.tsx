@@ -53,7 +53,7 @@ const approvedLinks: string[][][] = [
     linkGroup.forEach((url, index) => {
       if (index === linkGroup.length - 1) {
         // Final link takes over current tab
-        router.push(url);
+        //router.push(url);
       } else {
         window.open(url, '_blank', 'noopener,noreferrer');
       }
