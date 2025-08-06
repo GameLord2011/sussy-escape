@@ -1,103 +1,71 @@
-import Image from "next/image";
+'use client';
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+const approvedLinks: string[][][] = [
+  //Coding and Devwork
+  [
+    //webdev
+    [
+      'https://vscode.dev/',
+      'https://github.com/GameLord2011/My-Website/blob/main/app/repos/layout.tsx',
+      'https://open.spotify.com/collection/tracks',
+      'https://nextjs.org/docs/app/getting-started/fetching-data',
+      'https://tailwindcss.com/docs/background-clip',
+      'https://en.wikipedia.org/wiki/HTML5#New_APIs'
+    ],
+    //Powershell
+    [
+      'https://learn.microsoft.com/en-us/powershell/scripting/whats-new/what-s-new-in-powershell-76?view=powershell-7.5',
+      'https://github.com/GameLord2011/.dotfiles/blob/master/install.ps1',
+      'https://open.spotify.com/collection/tracks',
+      'https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup#behavior-when-starting-a-new-terminal-session',
+    ]
+  ],
+  //random resarch!
+  [
+    //video game consoles
+    [
+      'https://en.wikipedia.org/wiki/TI-84_Plus_series#TI-84_Plus_CE-T_Python_Edition_and_TI-84_Plus_CE_Python',
+      'https://en.wikipedia.org/wiki/Nuon_(DVD_technology)#Peripherals_and_accessories',
+      'https://en.wikipedia.org/wiki/IQue_Player#Games',
+      'https://open.spotify.com/collection/tracks',
+      'https://en.wikipedia.org/wiki/FM_Towns_Marty#Technical_specifications'
+    ],
+
+    [
+      'https://chatgpt.com/share/6893c98a-40e0-8009-9e2e-6b9f39e783f0',
+      'https://open.spotify.com/collection/tracks'
+    ]
+  ]
+];
+  const router = useRouter();
+
+  useEffect(() => {
+    // Select a random group of links from the entire pool
+    const subjectGroups = approvedLinks[Math.floor(Math.random() * approvedLinks.length)];
+    const linkGroup = subjectGroups[Math.floor(Math.random() * subjectGroups.length)];
+
+    linkGroup.forEach((url, index) => {
+      if (index === linkGroup.length - 1) {
+        // Final link takes over current tab
+        router.push(url);
+      } else {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
+    });
+  }, [router]);
+
+
+  return (
+    <main>
+      <br />
+      <hr />
+      <h1 className="text-3xl font-bold p-10">Escaping...</h1>
+      <hr />
+    </main>
   );
 }
