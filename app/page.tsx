@@ -1,9 +1,7 @@
 'use client';
 
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
-
-export default function Home() {
 
 const approvedLinks: string[][][] = [
   //Coding and Devwork
@@ -43,21 +41,22 @@ const approvedLinks: string[][][] = [
     ]
   ]
 ];
+
+export default function Home() {
   const router = useRouter();
 
-  useEffect(() => {
-    // Select a random group of links from the entire pool
+  useLayoutEffect(() => {
     const subjectGroups = approvedLinks[Math.floor(Math.random() * approvedLinks.length)];
     const linkGroup = subjectGroups[Math.floor(Math.random() * subjectGroups.length)];
 
-    linkGroup.forEach((url, index) => {
-      if (index === linkGroup.length - 1) {
-        // Final link takes over current tab
+    for (let i = 0; i < linkGroup.length; i++) {
+      const url = linkGroup[i];
+      if (i === linkGroup.length - 1) {
         router.push(url);
       } else {
         window.open(url, '_blank', 'noopener,noreferrer');
       }
-    });
+    }
   }, [router]);
 
 
