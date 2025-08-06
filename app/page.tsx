@@ -14,6 +14,7 @@ const approvedLinks: string[][][] = [
       'https://github.com/GameLord2011/My-Website/blob/main/app/repos/layout.tsx',
       'https://open.spotify.com/collection/tracks',
       'https://nextjs.org/docs/app/getting-started/fetching-data',
+      'https://stackoverflow.com/search?q=opening+new+tabs+with+js',
       'https://tailwindcss.com/docs/background-clip',
       'https://en.wikipedia.org/wiki/HTML5#New_APIs'
     ],
